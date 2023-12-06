@@ -60,36 +60,39 @@ export default function QuestionForm() {
               <label>Réponses :</label>
               <div className="flex flex-col gap-8">
                 {answers.map((answer, index) => (
-                  <div className="flex max-md:flex-col gap-2" key={index}>
+                  <div
+                    className="flex flex-col gap-2 pb-4 border-border border-b last:border-b-0"
+                    key={index}
+                  >
                     <Input
                       value={answer.content}
                       onInput={onAnswerInput(index)}
                       maxLength={255}
                       required
                     />
-                    <div className="flex items-center space-x-2 grow">
-                      <Checkbox
-                        id={index + '-checkbox'}
-                        checked={answer.isRight}
-                        onCheckedChange={onAnswerIsRightChange(index)}
-                      />
-                      <Label htmlFor={index + '-checkbox'}>Bonne réponse</Label>
+                    <div className="flex gap-6">
+                      <div className="flex items-center space-x-2 grow">
+                        <Checkbox
+                          id={index + '-checkbox'}
+                          checked={answer.isRight}
+                          onCheckedChange={onAnswerIsRightChange(index)}
+                        />
+                        <Label htmlFor={index + '-checkbox'}>
+                          Bonne réponse
+                        </Label>
+                      </div>
+                      <Button
+                        variant="destructive"
+                        onClick={onRemoveAnswer(index)}
+                      >
+                        <TrashIcon className="mr-2" />
+                        Supprimer
+                      </Button>
                     </div>
-                    <Button
-                      variant="destructive"
-                      size="icon"
-                      onClick={onRemoveAnswer(index)}
-                    >
-                      <TrashIcon />
-                    </Button>
                   </div>
                 ))}
               </div>
-              <Button
-                className="mt-8"
-                variant="secondary"
-                onClick={onAddAnswer}
-              >
+              <Button className="mt-8" onClick={onAddAnswer}>
                 <PlusIcon className="mr-2" />
                 Ajouter une réponse
               </Button>

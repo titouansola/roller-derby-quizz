@@ -11,7 +11,7 @@ import Link from 'next/link';
 
 export default function Header() {
   return (
-    <header className="h-[50px] border-b border-accent flex items-center justify-between px-3 lg:px-20">
+    <header className="h-[50px] border-b border-border flex items-center justify-between px-3 lg:px-20">
       <h1>Roller Derby Quizz</h1>
       <NavigationMenu>
         <NavigationMenuList>

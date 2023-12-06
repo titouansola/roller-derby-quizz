@@ -4,7 +4,7 @@ import cn from 'clsx';
 function Skeleton({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn('animate-pulse rounded-md bg-primary/10', className)}
+      className={cn('animate-pulse rounded-md bg-border', className)}
       {...props}
     />
   );

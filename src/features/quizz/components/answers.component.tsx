@@ -47,11 +47,7 @@ export default function Answers(props: {
                   onToggleAnswer(answer.id, !isSelected);
                 }}
               >
-                <Checkbox
-                  id={answer.id}
-                  checked={isSelected}
-                  disabled={showAnswers}
-                />
+                <Checkbox id={answer.id} checked={isSelected} />
                 <Label
                   className="cursor-pointer select-none"
                   htmlFor={answer.id}
