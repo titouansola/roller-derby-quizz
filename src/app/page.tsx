@@ -1,4 +1,4 @@
-import QuizzRunner from '@internals/features/questions/components/QuizzRunner';
+import QuizzRunner from '@internals/features/quizz/components/quizz-runner.component';
 
 export default function Home() {
   return <QuizzRunner />;

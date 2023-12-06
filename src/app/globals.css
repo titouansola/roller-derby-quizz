@@ -2,3 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .quizz-right-answer {
+        @apply bg-success text-success-foreground;
+    }
+    .quizz-wrong-answer {
+        @apply bg-destructive text-destructive-foreground;
+    }
+    .quizz-selected-answer {
+        @apply bg-secondary text-secondary-foreground border-primary;
+    }
+    .quizz-regular-answer {
+        @apply hover:bg-accent hover:text-accent-foreground border-accent;
+    }
+    .quizz-disabled-answer:not(.quizz-right-answer, .quizz-wrong-answer) {
+        @apply cursor-not-allowed pointer-events-none;
+    }
+}
