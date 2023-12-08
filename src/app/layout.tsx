@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Header from '@internals/components/header.component';
+import Header from '@internals/components/header/header.component';
 import './globals.css';
 import cn from 'clsx';
 
