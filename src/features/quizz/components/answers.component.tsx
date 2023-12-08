@@ -8,23 +8,25 @@ import {
 import { Button } from '@internals/components/ui/button.component';
 import { Checkbox } from '@internals/components/ui/checkbox.component';
 import { Label } from '@internals/components/ui/label.component';
-import useAnswers from '@internals/features/quizz/hooks/useAnswers';
-import { AnswerModel } from '../models/answer.model';
+import useAnswers from '../hooks/useAnswers';
+import { useQuestionsStore } from '../stores/questions.store';
+import { useAnswersStore } from '../stores/answers.store';
 
-export default function Answers(props: {
-  question: string;
-  answers: AnswerModel[];
-  onNext: () => void;
-}) {
+export default function Answers() {
+  const question = useQuestionsStore((s) => s.currentQuestion);
+  const answers = useAnswersStore((s) => s.answers);
+  //
   const { selectedAnswers, showAnswers, onClickMainAction, onToggleAnswer } =
-    useAnswers(props.answers, props.onNext);
+    useAnswers();
 
   return (
     <>
       <CardContent>
-        <p className="text-xl font-bold text-center mb-6">{props.question}</p>
+        <p className="text-xl font-bold text-center mb-6">
+          {question?.content}
+        </p>
         <ul className="flex flex-col gap-3">
-          {props.answers.map((answer) => {
+          {answers.map((answer) => {
             const isSelected = selectedAnswers.includes(answer.id);
 
             return (

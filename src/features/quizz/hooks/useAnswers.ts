@@ -1,9 +1,15 @@
 import { useMemo, useState } from 'react';
-import { AnswerModel } from '../models/answer.model';
+import { useQuestionsStore } from '../stores/questions.store';
+import { useAnswersStore } from '../stores/answers.store';
 
-export default function useAnswers(answers: AnswerModel[], onNext: () => void) {
+export default function useAnswers() {
+  const answers = useAnswersStore((s) => s.answers);
+  //
+  const nextQuestion = useQuestionsStore((s) => s.next);
+  //
   const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
   const [userIsRight, setUserIsRight] = useState<boolean | null>(null);
+  //
   const rightAnswers = useMemo(
     () => answers.filter(({ isRight }) => isRight).map(({ id }) => id),
     [answers],
@@ -26,7 +32,7 @@ export default function useAnswers(answers: AnswerModel[], onNext: () => void) {
     if (showAnswers) {
       setUserIsRight(null);
       setSelectedAnswers([]);
-      onNext();
+      nextQuestion();
     } else {
       setUserIsRight(check());
     }

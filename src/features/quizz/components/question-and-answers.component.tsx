@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import {
   Card,
   CardContent,
@@ -7,33 +8,28 @@ import {
   CardHeader,
   CardTitle,
 } from '@internals/components/ui/card.component';
+import { Skeleton } from '@internals/components/ui/skeleton.component';
+import Report from '@internals/features/report/components/report.component';
+import { useQuestionsStore } from '../stores/questions.store';
+import { useAnswersStore } from '../stores/answers.store';
 import { QuestionModel } from '../models/question.model';
 import Answers from './answers.component';
-import { useCallback, useEffect, useState } from 'react';
-import { AnswerModel } from '@internals/features/quizz/models/answer.model';
-import getAnswersByQuestionId from '@internals/features/quizz/lib/get-answers-by-question-id.request';
-import { Skeleton } from '@internals/components/ui/skeleton.component';
 
 export default function QuestionAndAnswers(props: {
   questions: QuestionModel[];
 }) {
-  const [question, setQuestion] = useState<QuestionModel | null>(null);
-  const [answers, setAnswers] = useState<AnswerModel[] | null>(null);
-
-  const onNext = useCallback(async () => {
-    const index = Math.floor(Math.random() * props.questions.length);
-    const newQuestion = props.questions[index];
-    setQuestion(newQuestion);
-    setAnswers(await getAnswersByQuestionId(newQuestion.id));
-  }, [props.questions]);
+  const question = useQuestionsStore((s) => s.currentQuestion);
+  const answers = useAnswersStore((s) => s.answers);
+  //
+  const pushQuestions = useQuestionsStore((s) => s.push);
 
   useEffect(() => {
-    void onNext();
-  }, [onNext]);
+    pushQuestions(props.questions);
+  }, [props.questions, pushQuestions]);
 
   return (
-    <div className="flex justify-center w-full px-8 py-20">
-      <Card>
+    <div className="flex flex-col items-center w-full px-8 py-20">
+      <Card className="max-w-xl">
         <CardHeader>
           <CardTitle>Roller Derby Quizz</CardTitle>
           <CardDescription>
@@ -43,11 +39,7 @@ export default function QuestionAndAnswers(props: {
           </CardDescription>
         </CardHeader>
         {!!question && answers!?.length > 0 ? (
-          <Answers
-            question={question.content}
-            answers={answers!}
-            onNext={onNext}
-          />
+          <Answers />
         ) : (
           <CardContent>
             <Skeleton className="w-3/4 mx-auto h-[25px] mb-6" />
@@ -60,6 +52,7 @@ export default function QuestionAndAnswers(props: {
           </CardContent>
         )}
       </Card>
+      {!!question && <Report />}
     </div>
   );
 }
