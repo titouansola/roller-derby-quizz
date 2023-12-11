@@ -29,7 +29,7 @@ export default function QuestionForm() {
   } = useQuestionForm();
 
   return (
-    <form className="flex justify-center w-full px-8 py-20" onSubmit={onSubmit}>
+    <form onSubmit={onSubmit}>
       <Card>
         <CardHeader>
           <CardTitle>Proposer une question</CardTitle>

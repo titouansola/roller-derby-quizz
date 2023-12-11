@@ -2,8 +2,9 @@ import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Header from '@internals/components/header/header.component';
-import './globals.css';
 import cn from 'clsx';
+
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,7 +18,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html lang="fr">
       <body className={cn(inter.className, 'bg-background')}>
         <Header />
-        {children}
+        <main className="flex flex-col items-center w-full px-8 py-20 gap-3">
+          {children}
+        </main>
       </body>
     </html>
   );

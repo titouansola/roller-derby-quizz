@@ -28,7 +28,8 @@ export default function QuestionAndAnswers(props: {
   }, [props.questions, pushQuestions]);
 
   return (
-    <div className="flex flex-col items-center w-full px-8 py-20">
+    <>
+      {!!question && <Report />}
       <Card className="max-w-xl">
         <CardHeader>
           <CardTitle>Roller Derby Quizz</CardTitle>
@@ -52,7 +53,6 @@ export default function QuestionAndAnswers(props: {
           </CardContent>
         )}
       </Card>
-      {!!question && <Report />}
-    </div>
+    </>
   );
 }

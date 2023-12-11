@@ -30,13 +30,9 @@ export default function Report() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button
-          variant="ghost"
-          className="mx-auto mt-10 text-destructive hover:bg-destructive hover:text-destructive-foreground"
-          size="sm"
-        >
+        <Button variant="destructive">
           <ExclamationTriangleIcon className="mr-2" />
-          Signaler un problème
+          Signaler une erreur pour cette question
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -50,8 +46,8 @@ export default function Report() {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Retour</AlertDialogCancel>
           <AlertDialogAction onClick={onConfirm}>Je confirme</AlertDialogAction>
+          <AlertDialogCancel>Retour</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
