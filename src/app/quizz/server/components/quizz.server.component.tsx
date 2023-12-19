@@ -30,7 +30,8 @@ export async function Quizz() {
       answers:
         answers?.filter(({ questionId }) => questionId === question.id) ?? [],
     }))
-    .sort(() => (Math.random() > 0.5 ? 1 : -1));
+    .sort(() => (Math.random() > 0.5 ? 1 : -1))
+    .slice(0, 40);
 
   if (!(answers?.length > 0) || !(questions?.length > 0)) {
     return (
