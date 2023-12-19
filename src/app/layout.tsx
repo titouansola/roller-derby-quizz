@@ -1,26 +1,31 @@
+'use client';
+
 import { PropsWithChildren } from 'react';
-import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Header from '@internals/components/header/header.component';
 import cn from 'clsx';
+import { Header } from '@internals/common/components/header/header.component';
+import { Footer } from '@internals/common/components/footer/footer.component';
+import { Toaster } from '@internals/common/components/ui/toaster.component';
 
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-  title: 'Roller Derby Quizz',
-  description: '',
-};
-
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="fr">
-      <body className={cn(inter.className, 'bg-background')}>
+      <head>
+        <title>Roller Derby Quizz</title>
+      </head>
+      <body
+        className={cn(inter.className, 'bg-background flex flex-col h-screen')}
+      >
         <Header />
-        <main className="flex flex-col items-center w-full px-8 py-20 gap-3">
+        <main className="flex flex-col items-center w-full px-8 py-10 gap-3 grow">
           {children}
         </main>
+        <Footer />
+        <Toaster />
       </body>
     </html>
   );

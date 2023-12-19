@@ -1,7 +1,7 @@
-import QuizzRunner from '@internals/features/quizz/components/quizz-runner.component';
+import { Quizz } from '@internals/app/quizz/server/components/quizz.server.component';
 
 export const revalidate = 5;
 
-export default function QuizzPage() {
-  return <QuizzRunner />;
+export default async function QuizzPage() {
+  return <Quizz />;
 }
