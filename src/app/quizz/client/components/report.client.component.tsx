@@ -1,4 +1,7 @@
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
+import { QuestionModel } from '@internals/common/models/question.model';
+import { useToast } from '@internals/common/components/ui/use-toast.hook';
+import { toggleReported } from '@internals/common/actions/toggle-reported.server.action';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,9 +14,7 @@ import {
   AlertDialogTrigger,
 } from '@internals/common/components/ui/alert-dialog.component';
 import { Button } from '@internals/common/components/ui/button.component';
-import { useToast } from '@internals/common/components/ui/use-toast.hook';
-import { QuestionModel } from '@internals/common/models/question.model';
-import { reportQuestion } from '@internals/app/quizz/server/actions/report-question.server.action';
+import { toastMessages } from '@internals/common/constants/toast-messages.const';
 
 export function Report(props: {
   question: QuestionModel;
@@ -21,13 +22,17 @@ export function Report(props: {
 }) {
   const { toast } = useToast();
   const onConfirm = async () => {
-    await reportQuestion(props.question);
-    toast({
-      title: 'Question signalée',
-      description: 'La précédente question a bien été signalée !',
-      variant: 'success',
-    });
-    props.nextQuestion();
+    try {
+      await toggleReported(props.question);
+      toast({
+        title: 'Question signalée',
+        description: 'La précédente question a bien été signalée !',
+        variant: 'success',
+      });
+      props.nextQuestion();
+    } catch (_) {
+      toast(toastMessages.error);
+    }
   };
 
   return (
@@ -49,8 +54,8 @@ export function Report(props: {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction onClick={onConfirm}>Je confirme</AlertDialogAction>
           <AlertDialogCancel>Retour</AlertDialogCancel>
+          <AlertDialogAction onClick={onConfirm}>Je confirme</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

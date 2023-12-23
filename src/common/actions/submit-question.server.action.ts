@@ -14,6 +14,7 @@ import {
   answersControls,
   questionControls,
 } from '@internals/common/utils/form.controls';
+import { revalidateQuizz } from '@internals/common/actions/revalidate-quizz.server.action';
 
 export async function submitQuestion(
   question: QuestionCreationDto | QuestionModel,
@@ -28,6 +29,8 @@ export async function submitQuestion(
   } else {
     await create(question, answers);
   }
+  //
+  await revalidateQuizz(question.id);
 }
 
 async function create(

@@ -8,6 +8,7 @@ import { Label } from '@internals/common/components/ui/label.component';
 import { Button } from '@internals/common/components/ui/button.component';
 import { Textarea } from '@internals/common/components/ui/textarea-component';
 import { UseQuestionFormOutput } from '@internals/common/components/question-form/use-question-form.hook';
+import { LoadableLabel } from '@internals/common/components/ui/loader.component';
 
 export function QuestionFormWrapper(
   props: PropsWithChildren<UseQuestionFormOutput>,
@@ -88,8 +89,8 @@ export function QuestionFormContent(props: UseQuestionFormOutput) {
 
 export function QuestionFormFooter(props: UseQuestionFormOutput) {
   return (
-    <Button type={'submit'} disabled={!props.isValid}>
-      Valider
+    <Button type={'submit'} disabled={!props.isValid || props.loading}>
+      <LoadableLabel loadingState={props.loading} idle={'Valider'} />
     </Button>
   );
 }

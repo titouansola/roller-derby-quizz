@@ -18,7 +18,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <title>Roller Derby Quizz</title>
       </head>
       <body
-        className={cn(inter.className, 'bg-background flex flex-col h-screen')}
+        className={cn(
+          inter.className,
+          'bg-background flex flex-col min-h-screen',
+        )}
       >
         <Header />
         <main className="flex flex-col items-center w-full px-8 py-10 gap-3 grow">

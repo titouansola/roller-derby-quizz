@@ -6,7 +6,7 @@ import {
 import { AnswerModel } from '@internals/common/models/answer.model';
 import { Runner } from '@internals/app/quizz/client/components/runner.client.component';
 import Link from 'next/link';
-import { RouteList } from '@internals/common/constants/route.list';
+import { RouteEnum } from '@internals/common/constants/route.enum';
 import { Button } from '@internals/common/components/ui/button.component';
 
 export async function Quizz() {
@@ -37,7 +37,7 @@ export async function Quizz() {
     return (
       <div className="flex flex-col items-center gap-2 text-center">
         <p>Oh non, il n&apos;y a pas encore de question disponible :(</p>
-        <Link href={RouteList.ADD_QUESTION}>
+        <Link href={RouteEnum.ADD_QUESTION}>
           <Button>Ajouter des questions</Button>
         </Link>
       </div>

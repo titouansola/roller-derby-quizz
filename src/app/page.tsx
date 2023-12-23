@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@internals/common/components/ui/button.component';
-import { RouteList } from '@internals/common/constants/route.list';
+import { RouteEnum } from '@internals/common/constants/route.enum';
 
 export default function Home() {
   return (
@@ -11,13 +11,13 @@ export default function Home() {
       </p>
       <div className={'mt-8 text-center'}>
         <p className={'mb-3'}>Je suis un.e joueur.se confirmé.e :</p>
-        <Link href={RouteList.ADD_QUESTION}>
+        <Link href={RouteEnum.ADD_QUESTION}>
           <Button>J&apos;ajoute des questions</Button>
         </Link>
       </div>
       <div className={'mt-8 text-center'}>
         <p className={'mb-3'}>Je suis un.e simple Fresh Meat :</p>
-        <Link href={RouteList.QUIZZ}>
+        <Link href={RouteEnum.QUIZZ}>
           <Button>Je me teste</Button>
         </Link>
       </div>

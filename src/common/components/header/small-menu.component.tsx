@@ -7,7 +7,7 @@ import {
   SheetTrigger,
 } from '@internals/common/components/ui/sheet.component';
 import { Button } from '@internals/common/components/ui/button.component';
-import { ROUTE_LIST } from '@internals/common/constants/route.list';
+import { ROUTE_LIST } from '@internals/common/constants/route.enum';
 
 export function SmallMenu() {
   const [open, setOpen] = useState(false);

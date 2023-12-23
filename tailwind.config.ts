@@ -27,8 +27,13 @@ const config: Config = {
         card: '#FCFDFC',
         'card-foreground': '#473B1F',
         //
+        popover: '#FDFDFC',
+        'popover-foreground': '#473B1F',
+        //
         input: '#DAD9D6',
         ring: '#D5AE39',
+        //
+        muted: '#DAD9D6',
       },
     },
   },

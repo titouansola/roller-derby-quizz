@@ -14,8 +14,9 @@ import {
   answersControls,
   questionControls,
 } from '@internals/common/utils/form.controls';
-import { submitQuestion } from '@internals/common/components/question-form/submit-question.server.action';
+import { submitQuestion } from '@internals/common/actions/submit-question.server.action';
 import { useToast } from '@internals/common/components/ui/use-toast.hook';
+import { toastMessages } from '@internals/common/constants/toast-messages.const';
 
 const initialQuestion: QuestionCreationDto = { content: '' };
 const initialAnswers: AnswerCreationDto[] = [];
@@ -34,6 +35,7 @@ export function useQuestionForm(
   const [answers, setAnswers] = useState([
     ...(questionToUpdate?.answers ?? initialAnswers),
   ]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setQuestion(questionToUpdate ?? initialQuestion);
@@ -93,23 +95,18 @@ export function useQuestionForm(
     async (event) => {
       event.preventDefault();
       //
+      setLoading(true);
       try {
         await submitQuestion(question, answers);
-        toast({
-          title: 'Question enregistrée',
-          description: 'Merci de ta participation !',
-          variant: 'success',
-        });
+        toast(toastMessages.updateQuestionSuccess);
         setQuestion(initialQuestion);
         setAnswers(initialAnswers);
         //
         onSubmit();
       } catch (_) {
-        toast({
-          title: 'Oops !',
-          description: 'Une erreur est survenue, réessaye plus tard.',
-          variant: 'destructive',
-        });
+        toast(toastMessages.error);
+      } finally {
+        setLoading(false);
       }
     },
     [question, answers, toast, onSubmit],
@@ -125,5 +122,6 @@ export function useQuestionForm(
     onRemoveAnswer,
     onSubmit: onSubmitForm,
     isValid: questionControls(question) && answersControls(answers),
+    loading,
   };
 }
