@@ -10,8 +10,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@internals/common/components/ui/alert-dialog.component';
-import { RouteList } from '@internals/common/constants/route.list';
-import { revalidateQuizz } from '@internals/app/quizz/server/actions/revalidate-quizz.server.action';
+import { RouteEnum } from '@internals/common/constants/route.enum';
+import { revalidateQuizz } from '@internals/common/actions/revalidate-quizz.server.action';
 
 export function EndModal(props: {
   score: number;
@@ -26,7 +26,7 @@ export function EndModal(props: {
     await revalidateQuizz();
     router.refresh();
   };
-  const quit = () => router.push(RouteList.HOME);
+  const quit = () => router.push(RouteEnum.HOME);
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
@@ -44,8 +44,8 @@ export function EndModal(props: {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction onClick={retry}>Recommencer</AlertDialogAction>
           <AlertDialogCancel onClick={quit}>Quitter</AlertDialogCancel>
+          <AlertDialogAction onClick={retry}>Recommencer</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

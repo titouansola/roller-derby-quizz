@@ -15,7 +15,7 @@ import {
   QuestionFormFooter,
   QuestionFormWrapper,
 } from '@internals/common/components/question-form/question-form.client.component';
-import { revalidateQuizz } from '@internals/app/quizz/server/actions/revalidate-quizz.server.action';
+import { revalidateQuizz } from '@internals/common/actions/revalidate-quizz.server.action';
 
 export default function AddQuestionCard() {
   const service = useQuestionForm(revalidateQuizz);

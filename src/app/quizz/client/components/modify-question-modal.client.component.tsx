@@ -1,4 +1,9 @@
+'use client';
+
 import { useState } from 'react';
+import { Pencil2Icon } from '@radix-ui/react-icons';
+import { FullQuestionModel } from '@internals/common/models/question.model';
+import { useQuestionForm } from '@internals/common/components/question-form/use-question-form.hook';
 import {
   Dialog,
   DialogContent,
@@ -7,8 +12,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@internals/common/components/ui/dialog.component';
-import { useQuestionForm } from '@internals/common/components/question-form/use-question-form.hook';
-import { FullQuestionModel } from '@internals/common/models/question.model';
 import {
   QuestionFormContent,
   QuestionFormDescription,
@@ -16,16 +19,15 @@ import {
   QuestionFormWrapper,
 } from '@internals/common/components/question-form/question-form.client.component';
 import { Button } from '@internals/common/components/ui/button.component';
-import { Pencil2Icon } from '@radix-ui/react-icons';
 
 export function ModifyQuestionModal(props: {
   question: FullQuestionModel;
-  onSubmit: () => void;
+  onSubmit?: () => void;
 }) {
   const [open, setOpen] = useState(false);
   const service = useQuestionForm(() => {
     setOpen(false);
-    props.onSubmit();
+    props.onSubmit?.();
   }, props.question);
   //
   return (

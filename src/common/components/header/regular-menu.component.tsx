@@ -6,7 +6,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from '@internals/common/components/ui/navigation-menu.component';
-import { ROUTE_LIST } from '@internals/common/constants/route.list';
+import { ROUTE_LIST } from '@internals/common/constants/route.enum';
 
 export function RegularMenu() {
   return (
