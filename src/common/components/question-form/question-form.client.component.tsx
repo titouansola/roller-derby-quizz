@@ -40,7 +40,6 @@ export function QuestionFormContent(props: UseQuestionFormOutput) {
           id="question"
           value={props.question.content}
           onInput={props.onQuestionInput}
-          maxLength={255}
           required
         />
       </div>
@@ -55,7 +54,6 @@ export function QuestionFormContent(props: UseQuestionFormOutput) {
               <Input
                 value={answer.content}
                 onInput={props.onAnswerInput(index)}
-                maxLength={255}
                 required
               />
               <div className="flex gap-6">
