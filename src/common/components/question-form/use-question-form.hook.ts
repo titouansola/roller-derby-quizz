@@ -18,7 +18,7 @@ import { submitQuestion } from '@internals/common/actions/submit-question.server
 import { useToast } from '@internals/common/components/ui/use-toast.hook';
 import { toastMessages } from '@internals/common/constants/toast-messages.const';
 
-const initialQuestion: QuestionCreationDto = { content: '' };
+const initialQuestion: QuestionCreationDto = { content: '', description: '' };
 const initialAnswers: AnswerCreationDto[] = [];
 
 export type UseQuestionFormOutput = ReturnType<typeof useQuestionForm>;
@@ -46,7 +46,16 @@ export function useQuestionForm(
     (e) =>
       setQuestion((q) => ({
         ...q,
-        content: (e.target as HTMLInputElement).value,
+        content: (e.target as HTMLTextAreaElement).value,
+      })),
+    [],
+  );
+
+  const onDescriptionInput: FormEventHandler<HTMLTextAreaElement> = useCallback(
+    (e) =>
+      setQuestion((q) => ({
+        ...q,
+        description: (e.target as HTMLTextAreaElement).value,
       })),
     [],
   );
@@ -116,6 +125,7 @@ export function useQuestionForm(
     question,
     answers,
     onQuestionInput,
+    onDescriptionInput,
     onAnswerInput,
     onAnswerIsRightChange,
     onAddAnswer,

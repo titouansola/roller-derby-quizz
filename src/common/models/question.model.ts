@@ -3,6 +3,7 @@ import { AnswerModel } from '@internals/common/models/answer.model';
 
 export type QuestionModel = Id & {
   content: string;
+  description: string;
   reported?: boolean;
 };
 

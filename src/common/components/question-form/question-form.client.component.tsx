@@ -1,13 +1,14 @@
 'use client';
 
+import cn from 'clsx';
 import { PropsWithChildren } from 'react';
 import { PlusIcon, TrashIcon } from '@radix-ui/react-icons';
+import { UseQuestionFormOutput } from '@internals/common/components/question-form/use-question-form.hook';
 import { Input } from '@internals/common/components/ui/input.component';
 import { Checkbox } from '@internals/common/components/ui/checkbox.component';
 import { Label } from '@internals/common/components/ui/label.component';
 import { Button } from '@internals/common/components/ui/button.component';
 import { Textarea } from '@internals/common/components/ui/textarea-component';
-import { UseQuestionFormOutput } from '@internals/common/components/question-form/use-question-form.hook';
 import { LoadableLabel } from '@internals/common/components/ui/loader.component';
 
 export function QuestionFormWrapper(
@@ -38,10 +39,22 @@ export function QuestionFormContent(props: UseQuestionFormOutput) {
         <label htmlFor="question">Question :</label>
         <Textarea
           id="question"
+          rows={5}
           value={props.question.content}
           onInput={props.onQuestionInput}
           required
         />
+      </div>
+      <div className="mb-8">
+        <label htmlFor="description">
+          Explications : <i className="text-muted">(facultatif)</i>
+          <Textarea
+            id="description"
+            rows={5}
+            value={props.question.description}
+            onInput={props.onDescriptionInput}
+          />
+        </label>
       </div>
       <div>
         <label>Réponses :</label>
@@ -76,7 +89,10 @@ export function QuestionFormContent(props: UseQuestionFormOutput) {
             </div>
           ))}
         </div>
-        <Button className="mt-8" onClick={props.onAddAnswer}>
+        <Button
+          className={cn(props.answers.length > 0 && 'mt-8')}
+          onClick={props.onAddAnswer}
+        >
           <PlusIcon className="mr-2" />
           Ajouter une réponse
         </Button>

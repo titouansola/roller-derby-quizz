@@ -44,12 +44,12 @@ async function create(
     id: uuidv4(),
     questionId,
   }));
-  await sql`INSERT INTO questions VALUES (${question.id}, ${question.content});`;
+  await sql`INSERT INTO questions VALUES (${question.id}, ${question.content}, FALSE, ${question.description});`;
   await insertAnswers(answers);
 }
 
 async function update(question: QuestionModel, answers: AnswerModel[]) {
-  await sql`UPDATE questions SET content = ${question.content} WHERE id = ${question.id}`;
+  await sql`UPDATE questions SET content = ${question.content}, description = ${question.description} WHERE id = ${question.id}`;
   await sql`DELETE FROM answers WHERE question_id = ${question.id}`;
   await insertAnswers(
     answers.map((a) => ({ ...a, id: uuidv4(), questionId: question.id })),

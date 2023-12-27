@@ -17,6 +17,7 @@ import { EndModal } from '@internals/app/quizz/client/components/end-modal.clien
 import { useQuizzRunner } from '@internals/app/quizz/hooks/use-quizz-runner.hook';
 import { Report } from '@internals/app/quizz/client/components/report.client.component';
 import { ModifyQuestionModal } from '@internals/app/quizz/client/components/modify-question-modal.client.component';
+import { ShowDescriptionModal } from '@internals/app/quizz/client/components/show-description-modal.client.component';
 
 export function Runner(props: { questions: FullQuestionModel[] }) {
   const { state, actions } = useQuizzRunner(props.questions);
@@ -35,6 +36,7 @@ export function Runner(props: { questions: FullQuestionModel[] }) {
       />
       <ModifyQuestionModal
         question={state.currentQuestion}
+        disabled={!state.showAnswers}
         onSubmit={actions.nextQuestion}
       />
       <Card className="max-w-xl">
@@ -89,14 +91,13 @@ export function Runner(props: { questions: FullQuestionModel[] }) {
             })}
           </ul>
         </CardContent>
-        <CardFooter className="flex-col items-stretch">
-          <div className="text-center font-semibold mb-2">
+        <CardFooter className="flex-col gap-3 items-stretch">
+          <div className="text-center font-semibold">
             {state.isRight === true && <>Bravo !</>}
             {state.isRight === false && <>Raté !</>}
             {state.isRight === null && <>&nbsp;</>}
           </div>
           <Button
-            className="grow"
             onClick={(e) => {
               e.preventDefault();
               if (state.showAnswers) {
@@ -109,6 +110,10 @@ export function Runner(props: { questions: FullQuestionModel[] }) {
           >
             {state.showAnswers ? 'Question suivante' : 'Valider'}
           </Button>
+          <ShowDescriptionModal
+            activated={state.showAnswers}
+            question={state.currentQuestion}
+          />
         </CardFooter>
       </Card>
     </>
