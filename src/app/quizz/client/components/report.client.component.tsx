@@ -46,7 +46,7 @@ export function Report(props: {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            Cette question est problématique ?
+            🚨 Cette question est problématique ?
           </AlertDialogTitle>
           <AlertDialogDescription>
             Elle sera analysée et supprimée{' '}

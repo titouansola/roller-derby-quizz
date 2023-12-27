@@ -22,6 +22,7 @@ import { Button } from '@internals/common/components/ui/button.component';
 
 export function ModifyQuestionModal(props: {
   question: FullQuestionModel;
+  disabled?: boolean;
   onSubmit?: () => void;
 }) {
   const [open, setOpen] = useState(false);
@@ -33,7 +34,7 @@ export function ModifyQuestionModal(props: {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>
+        <Button disabled={props.disabled || false}>
           <Pencil2Icon className="mr-2" />
           Modifier la question
         </Button>
@@ -41,7 +42,7 @@ export function ModifyQuestionModal(props: {
       <DialogContent>
         <QuestionFormWrapper {...service}>
           <DialogHeader>
-            <DialogTitle>Modifier une question</DialogTitle>
+            <DialogTitle>✍️ Modifier une question</DialogTitle>
           </DialogHeader>
           <p>
             <QuestionFormDescription />

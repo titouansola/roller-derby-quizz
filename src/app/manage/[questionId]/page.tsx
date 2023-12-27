@@ -1,9 +1,8 @@
-import { sql } from '@vercel/postgres';
 import Link from 'next/link';
 import { ChevronLeftIcon } from '@radix-ui/react-icons';
-import { AnswerModel } from '@internals/common/models/answer.model';
-import { FullQuestionModel } from '@internals/common/models/question.model';
 import { RouteEnum } from '@internals/common/constants/route.enum';
+import { getQuestionById } from '@internals/common/requests/questions.request';
+import { getAnswersByQuestionId } from '@internals/common/requests/answers.request';
 import {
   Table,
   TableBody,
@@ -24,18 +23,9 @@ export default async function QuestionAnswers({
 }: {
   params: { questionId: string };
 }) {
-  const question = (
-    await sql`SELECT q.id, q.content, q.reported FROM questions q WHERE q.id=${params.questionId};`
-  ).rows[0] as FullQuestionModel;
-  const answers = (
-    await sql`SELECT id, content, question_id, is_right as isright FROM answers WHERE question_id=${params.questionId};`
-  ).rows.map<AnswerModel>(({ id, content, question_id, isright }) => ({
-    id,
-    content,
-    questionId: question_id,
-    isRight: isright,
-  }));
-
+  const question = await getQuestionById(params.questionId);
+  const answers = await getAnswersByQuestionId(params.questionId);
+  //
   return (
     <div className="w-full">
       <Link href={RouteEnum.MANAGE}>
@@ -45,6 +35,10 @@ export default async function QuestionAnswers({
         </Button>
       </Link>
       <p className="font-bold mt-8">{question.content}</p>
+      <p className="italic text-sm mt-2">
+        {question.description ||
+          "Aucune explication n'est enregistrée pour cette question."}
+      </p>
       <div className="flex gap-3 my-5">
         <ModifyQuestionModal question={{ ...question, answers }} />
         <ReportToggleButton question={question} />
