@@ -1,10 +1,8 @@
-import { version } from '../../../../package.json';
-
 export function Footer() {
   return (
     <footer className="flex justify-center gap-4 py-3 border-t border-border text-xs">
       <p>
-        version: <b>{version}</b>
+        version: <b>1.2.1</b>
       </p>
       <p>
         Réalisé par{' '}
