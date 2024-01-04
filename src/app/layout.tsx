@@ -22,6 +22,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           inter.className,
           'bg-background flex flex-col min-h-screen',
         )}
+        suppressHydrationWarning
       >
         <Header />
         <main className="flex flex-col items-center w-full px-8 py-10 gap-3 grow">
