@@ -9,4 +9,8 @@ export const ROUTE_LIST = [
   { href: RouteEnum.HOME, label: 'Accueil' },
   { href: RouteEnum.QUIZZ, label: 'Répondre au quizz' },
   { href: RouteEnum.ADD_QUESTION, label: 'Proposer une question' },
+  {
+    href: 'https://static.wftda.com/rules/wftda-rules-french.pdf',
+    label: 'Règles officielles',
+  },
 ];

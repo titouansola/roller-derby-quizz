@@ -8,8 +8,8 @@ export async function Quizz() {
   const questions = (await getQuestionsWithAnswers())
     // Shuffle
     .sort(() => (Math.random() > 0.5 ? 1 : -1))
-    // Select only 40
-    .slice(0, 40);
+    // Select only 50
+    .slice(0, 50);
 
   if (!(questions?.length > 0)) {
     return (
