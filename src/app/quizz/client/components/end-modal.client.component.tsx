@@ -20,6 +20,8 @@ export function EndModal(props: {
 }) {
   const router = useRouter();
   const [open, setOpen] = useState(true);
+  const result = props.score / props.total;
+  const hasPassed = result >= 0.8;
 
   const retry = async () => {
     props.reset();
@@ -40,7 +42,18 @@ export function EndModal(props: {
             </b>
             .
             <br />
-            Continues comme ça !
+            {hasPassed ? (
+              <>
+                Félicitations, tu as obtenu un score supérieur à 80% de bonnes
+                réponses. Tu es prêt.e à passer l&apos;examen officiel !
+              </>
+            ) : (
+              <>
+                Encore un effort ! Il te faut obtenir un score supérieur à 80%
+                de bonnes réponses pour valider les MS Théoriques, continue
+                comme ça !
+              </>
+            )}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
